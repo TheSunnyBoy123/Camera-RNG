@@ -25,22 +25,22 @@ def true_randint(lower, upper, method = None):
         #choose central pixel
         central_pixel = frame[int(len(frame)/2)][0]
         # print(central_pixel)
-        m = 1
-        while m <= 10000 and (m!=0 and m!=1):
-            print(m)
+
+        list_of_numbers = []
+        for _ in range(3):
+            m = 1
             for value in central_pixel:
                 m *= value
-        # print(m) 
-        #m holds a true random number
+            list_of_numbers.append(m)
         
-        normalized_m = m
-        while normalized_m > 10000:
-            normalized_m %= 10
-        normalized_m /= 10000
+        list_of_numbers.sort()
 
+        upper_rng = list_of_numbers[-1]
+        lower_rng = list_of_numbers[0]
+        rng = list_of_numbers[1]
 
-        return int((normalized_m * (upper-lower)) + lower)
-
+        dif_to_base = ((rng-lower_rng) * (upper-lower)/(upper_rng-lower_rng)) 
+        return lower + dif_to_base
     elif method == 'mic':
         #use mic for generation 
         return number
